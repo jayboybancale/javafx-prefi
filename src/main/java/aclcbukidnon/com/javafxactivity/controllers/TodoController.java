@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.util.function.Consumer;
+
 public class TodoController {
 
     @FXML
@@ -38,7 +40,12 @@ public class TodoController {
 
 
         var result = dialog.showAndWait();
-        result.ifPresent(text -> System.out.println(text));
+        result.ifPresent(new Consumer<String>() {
+            @Override
+            public void accept(String text) {
+                System.out.println(text);
+            }
+        });
     }
 
 
@@ -50,7 +57,7 @@ public class TodoController {
 
 
         var result = dialog.showAndWait();
-        result.ifPresent(text -> System.out.println(text));
+        result.ifPresent(System.out::println);
     }
 
     @FXML
